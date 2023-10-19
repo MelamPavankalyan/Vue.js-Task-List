@@ -1,0 +1,102 @@
+vue create task-list-app
+cd task-list-app
+
+<template>
+  <div>
+    <h2>Task List</h2>
+    <ul>
+      <li v-for="task in filteredTasks" :key="task.id">
+        {{ task.title }}
+        <button @click="deleteTask(task.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    tasks: Array, // Pass tasks as a prop
+  },
+  data() {
+    return {
+      filterCompleted: false,
+    };
+  },
+  computed: {
+    filteredTasks() {
+      return this.filterCompleted
+        ? this.tasks.filter((task) => task.completed)
+        : this.tasks;
+    },
+  },
+  methods: {
+    deleteTask(taskId) {
+      // Implement the logic to delete a task
+    },
+  },
+};
+</script>
+<template>
+  <div>
+    <h2>Create Task</h2>
+    <form @submit.prevent="addTask">
+      <input v-model="newTask" placeholder="Task title" required />
+      <button type="submit">Add Task</button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      newTask: "",
+    };
+  },
+  methods: {
+    addTask() {
+      if (this.newTask.trim() !== "") {
+        // Implement the logic to add a new task
+        this.newTask = ""; // Clear the input field
+      } else {
+        // Handle validation error (e.g., display an error message)
+      }
+    },
+  },
+};
+</script>
+<template>
+  <div>
+    <h2>Delete Task</h2>
+    <button @click="deleteTasks">Delete Completed Tasks</button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    deleteTasks() {
+      // Implement the logic to delete completed tasks
+    },
+  },
+};
+</script>
+<template>
+  <div>
+    <h2>Filter Tasks</h2>
+    <label>
+      <input type="checkbox" v-model="filterCompleted" /> Show Completed Tasks
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      filterCompleted: false,
+    };
+  },
+};
+</script>
